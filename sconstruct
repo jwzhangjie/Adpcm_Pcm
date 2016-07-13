@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+
+env = Environment()
+env['CPPFLAGS'] = '-g'
+env.Program('tenc', source=['adpcm.c', 'tenc.c'])
+env.Program('tdec', source=['adpcm.c', 'tdec.c'])
