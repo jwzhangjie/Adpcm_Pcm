@@ -29,13 +29,34 @@ int main(int argc, void *argv[]){
     int left = len % 320;
     len /= 320;
 
+    int flag = 0;
     for (i = 0; i < len; ++i){
-
+#if 0
+        if (random() % 20 != 0){
+            fread(indata, 2, 160, inf);
+            adpcm_coder(indata, outdata, sizeof(indata), &state);
+            fwrite(outdata, 1, 80, outf);
+            //continue;
+        }
+#else
         fread(indata, 2, 160, inf);
         adpcm_coder(indata, outdata, sizeof(indata), &state);
+
+        if (random() % 30 == 1) {printf("!");  continue;}
         fwrite(outdata, 1, 80, outf);
+#endif
+
+#if 0
+        //if (random() % 20 == 0){
+        if (i == 30 || i == 90){
+            printf("~");
+            memset(&state, 0, sizeof(state));
+        }
+#endif
+        printf(".");
     }
 
+    printf("\n");
     fread(indata, 2, left/2, inf);
     adpcm_coder(indata, outdata, left, &state);
     fwrite(outdata, 1, left/4, outf);
