@@ -1,0 +1,7 @@
+*.o
+*.out
+*.pcm
+core
+*.dblite
+tdec
+tenc
